@@ -270,13 +270,29 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ---------------- UPLOAD IMAGE ----------------
+# uploaded_file = st.file_uploader("Upload a medical image (JPEG, PNG)", type=["png", "jpg", "jpeg"], label_visibility="collapsed")
+
+# # # File uploader
+# if uploaded_file:
+#     st.markdown('<div class="image-preview">', unsafe_allow_html=True)
+#     st.markdown('<h4 style="text-align:center;">Uploaded Image -</h4>', unsafe_allow_html=True)
+#     st.image(uploaded_file, width=70, caption="Uploaded Medical Image")  # Reduced from 350 to 250
+#     st.markdown('</div>', unsafe_allow_html=True)
+
+#     # st.image(uploaded_file, width=150)  # Adjusted width smaller
+#     # st.markdown('</div>', unsafe_allow_html=True)
+
+# ---------------- UPLOAD IMAGE ----------------
 uploaded_file = st.file_uploader("Upload a medical image (JPEG, PNG)", type=["png", "jpg", "jpeg"], label_visibility="collapsed")
 
-# # File uploader
 if uploaded_file:
-    st.markdown('<div class="image-preview">', unsafe_allow_html=True)
-    st.image(uploaded_file, width=70, caption="Uploaded Medical Image")  # Reduced from 350 to 250
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px; margin-bottom: 20px;">
+        <h5 style="margin: 0;">Uploaded Image -</h5>
+        <img src="data:image/jpeg;base64,{}" style="width: 70px; height: auto; border-radius: 10px; box-shadow: 0px 0px 8px rgba(0,0,0,0.1);" />
+    </div>
+    """.format(base64.b64encode(uploaded_file.getvalue()).decode()), unsafe_allow_html=True)
+
 
 # ---------------- SUBMIT + ANALYSIS ----------------
 st.markdown('<div style="display: flex; justify-content: center; margin-top: 20px;">', unsafe_allow_html=True)
@@ -284,7 +300,6 @@ submit = st.button("🔍 Generate the Analysis")
 st.markdown('</div>', unsafe_allow_html=True)
 
 if submit:
-
     if uploaded_file:
         image_data = uploaded_file.getvalue()
         image_parts = [{"mime_type": "image/jpeg", "data": image_data}]
@@ -292,11 +307,17 @@ if submit:
 
         with st.spinner("Analyzing image with AI..."):
             response = model.generate_content(prompt_parts)
-        
+
         if response:
             st.markdown('<div class="result-title">🩺 Analysis Report:</div>', unsafe_allow_html=True)
             st.success(response.text)
+
+            # Auto-scroll to bottom after displaying response
+            st.markdown("""
+                <script>
+                window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+                </script>
+            """, unsafe_allow_html=True)
     else:
         st.warning("Please upload an image before generating the analysis.")
-
 
