@@ -200,7 +200,9 @@ body {{
 .main-title {{
     font-size: 40px;
     font-weight: 700;
+    white-space: nowrap;
     color: #2c3e50;
+    font-size: 40px;
 }}
 
 .subheader {{
@@ -208,6 +210,8 @@ body {{
     font-size: 18px;
     color: #7f8c8d;
     margin-bottom: 60px;
+    white-space: nowrap;
+    font-size: 18px;
 }}
 
 .uploadbox {{
@@ -218,6 +222,7 @@ body {{
     margin-bottom: 20px;
     border: 2px dashed #bdc3c7;
     text-align: center;
+    width: 150px;
 }}
 
 .stButton > button {{
