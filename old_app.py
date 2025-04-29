@@ -1,12 +1,17 @@
-import streamlit as st 
+## <---------- Import Dependencies and Configuration ---------->
+import streamlit as st
 from pathlib import Path
 import google.generativeai as genai
 
-from api_key import api_key
-genai.configure(api_key=api_key)
+from api_key import api_key  # Importing API key from a separate module
+genai.configure(api_key=api_key)  # Configuring the API key
 
+# Setting the Streamlit app page config
 st.set_page_config(page_title = "Vital Image Analytics", page_icon = ":robot:")
 
+
+## <---------- Generation Configuration and Safety Settings ---------->
+# Configuration for how the model generates responses
 generation_config = {
     "temperature": 0.4,
     "top_p": 1,
@@ -14,6 +19,7 @@ generation_config = {
     "max_output_tokens": 4096,
 }
 
+# Content moderation and safety settings
 safety_settings = [
     {
         "category": "HARM_CATEGORY_HARASSMENT",
@@ -33,7 +39,8 @@ safety_settings = [
     }
 ]
 
-
+## <---------- System Prompt for Medical Image Analysis ---------->
+# Instructional prompt for the AI model with clear analysis structure
 system_prompt="""
 As a highly skilled medical practitioner specializing in image analysis, you are tasked with examining medical images for a reowned hospital. Your expertise is crucial in identifying any anomalies, diseases, or health issues that may be present in the images.
 
@@ -56,30 +63,39 @@ Please respond me in these 4 headlines: Detailed Analysis, Findings Report, Reco
 
 """
 
+
+## <---------- Initialize Generative Model ---------->  
+# Loading the Gemini model with config and safety settings
 model = genai.GenerativeModel(model_name = "models/gemini-1.5-pro-latest",
                               generation_config = generation_config,
                               safety_settings = safety_settings)
 
 
-st.image("logo.png", width =150)
-st.title("Med Detect AI: Vital Image Analysis")
-st.subheader("An application that can help users to identify medical images")
+## <---------- UI Elements: Logo, Title, Subheader ---------->
 
+st.image("logo.png", width=150)  # Display hospital or app logo
+st.title("Med Detect AI: Vital Image Analysis")  # Main Title
+st.subheader("An application that can help users to identify medical images")  # Subtitle
+
+## <---------- Image Upload UI and Display ---------->
+# File uploader for users to upload medical images
 uploaded_file = st.file_uploader("Upload an image", type = ["png", "jpg", "jpeg"])
 if uploaded_file: 
     st.image(uploaded_file, width=300, caption = "Uploaded Medical Image")
 
+# Button to trigger the AI analysis
 submit_button = st.button("Generate the Analysis")
 
+## <---------- Analysis Logic and AI Integration ---------->
 if submit_button:
     ## process the uploaded image 
-    image_data = uploaded_file.getvalue()
+    image_data = uploaded_file.getvalue()  # Get image data in bytes
 
     ## making our image ready
     image_parts = [
         {
-            "mime_type": "image/jpeg",
-            "data": image_data
+            "mime_type": "image/jpeg",  # Mime type
+            "data": image_data  # Image data
         },
     ]
 
@@ -91,7 +107,8 @@ if submit_button:
 
     ## Generate a response based on prompt and image 
     response = model.generate_content(prompt_parts)
+    
     if response:
-        st.title("Here is the analysis based on your image: ")
-        st.write(response.text)
+        st.title("Here is the analysis based on your image: ")  # Display result heading
+        st.write(response.text)  # Show model's analysis
 
