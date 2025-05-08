@@ -1,5 +1,7 @@
 # Med-Detect-AI - Medical Image Detection with Vital Image Analytics 🏥🤖
 
+Note: The source code for this project has been made private intentionally.
+
 Welcome to **Med-Detect-AI**, an AI-driven medical diagnostic tool designed to assist healthcare professionals and individuals in detecting potential health issues through the analysis of medical data such as images, reports, and symptoms. This tool leverages the power of artificial intelligence to support early diagnosis and treatment. 🧠💉
 
 ## Features ✨
