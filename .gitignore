@@ -1,9 +1,0 @@
-*.zip
-*.pdf
-
-api_key.py
-
-__pycache__/
-
-.env
-.venv
