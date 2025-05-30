@@ -18,27 +18,6 @@ Welcome to **Med-Detect-AI**, an AI-driven medical diagnostic tool designed to a
 3. Receive the diagnostic results, which include potential health issues and suggestions for further actions. 🏥
 4. Use the insights to seek appropriate medical consultation or initiate preventive measures. 💡
 
-## Installation 🏗️
-
-1. Clone the repository:
-    ```
-    git clone https://github.com/yourusername/Med-Detect-AI.git
-    ```
-
-2. Navigate into the project directory:
-    ```
-    cd Med-Detect-AI
-    ```
-
-3. Install the necessary dependencies:
-    ```
-    pip install -r requirements.txt
-    ```
-
-4. Run the application:
-    ```
-    python med_detect.py
-    ```
 
 ## Usage 📈
 
@@ -46,17 +25,6 @@ Welcome to **Med-Detect-AI**, an AI-driven medical diagnostic tool designed to a
 - The AI system will analyze the data and generate diagnostic results. ⚡
 - Review the results and take appropriate action, such as consulting with a healthcare provider. 🩺
 
-## Contributing 🤝
-
-We are always looking to improve **Med-Detect-AI** and welcome contributions from the community! If you’d like to help, follow these steps:
-
-1. Fork the repository. 🍴
-2. Create a new branch (`git checkout -b feature-name`). 🌱
-3. Make your changes and commit them (`git commit -am 'Add new feature'`). 📝
-4. Push your changes to your forked repository (`git push origin feature-name`). 🚀
-5. Create a pull request to merge your changes into the main branch. 🔄
-
-We appreciate your contributions and support in improving the accuracy and usability of **Med-Detect-AI**! 🙌
 
 ## Feedback & Issues 🗣️
 
